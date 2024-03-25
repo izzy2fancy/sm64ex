@@ -1072,5 +1072,20 @@ MAKEFLAGS += --no-builtin-rules
 
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
+COPY = cp -f
+MKDIR = mkdir -p
+RMDIR = rm -rvf
+
+all: sm64.us.f3dex2e.exe
+
+sm64.us.f3dex2e.exe: app.o
+	g++ -Wl,-subsystem,windows -o $@ $<
+
+app.o: app.cpp
+	g++ -c $<
+
+clean:
+	- rm app.o sm64.us.f3dex2e.exe sm64.msix priconfig.xml resources.pri
+
 package:
 	./package.bat
