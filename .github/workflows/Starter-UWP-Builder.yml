@@ -39,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v4.3.1
         with:
           name: uwp_application
-          path: sm64.msix
+          path: sm64.us.f3dex2e.msix
