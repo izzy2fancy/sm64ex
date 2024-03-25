@@ -3,7 +3,7 @@ name: UWP Application Build
 on:
   push:
     branches:
-      - master
+      - appimage
 
 jobs:
   build:
