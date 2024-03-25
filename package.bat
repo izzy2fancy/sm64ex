@@ -16,9 +16,9 @@ rem Run makepri commands
 makepri createconfig /cf priconfig.xml /dq en-US /o /pv 10.0.0
 del resources.pri
 makepri new /pr "%CD%" /cf priconfig.xml
-makeappx pack /m AppxManifest.xml /f filemap.txt /p UWPApp.msix /o
+makeappx pack /m AppxManifest.xml /f filemap.txt /p sm64.us.f3dex2e.msix /o
 
 rem Sign the package with the generated certificate SHA
-SignTool sign /v /a /sha1 %CERTIFICATE_SHA% /fd SHA256 UWPApp.msix
+SignTool sign /v /a /sha1 %CERTIFICATE_SHA% /fd SHA256 sm64.us.f3dex2e.msix
 
 endlocal
