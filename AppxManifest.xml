@@ -4,12 +4,12 @@
     xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
     xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
     <Identity
-        Name="UWPApp.App"
+        Name="sm64.us.f3dex2e.App"
         Version="1.0.0.0"
         ProcessorArchitecture="x64"
         Publisher="CN=MyCompany, O=MyCompany, L=MyCity, S=MyState, C=MyCountry" />
     <Properties>
-        <DisplayName>UWPApp</DisplayName>
+        <DisplayName>sm64.us.f3dex2e</DisplayName>
         <PublisherDisplayName>MyCompany</PublisherDisplayName>
         <Description>UWP test application</Description>
         <Logo>icons/appicon.png</Logo>
@@ -29,9 +29,9 @@
         <DeviceCapability Name="XboxInput"/>
     </Capabilities>
     <Applications>
-        <Application Id="UWPApp" Executable="UWPApp.exe" EntryPoint="Windows.FullTrustApplication">
+        <Application Id="sm64.us.f3dex2eApp" Executable="sm64.us.f3dex2eApp.exe" EntryPoint="Windows.FullTrustApplication">
             <uap:VisualElements
-                DisplayName="UWPApp"
+                DisplayName="sm64.us.f3dex2eApp"
                 Description="UWP test application"
                 Square150x150Logo="icons/appicon_150x150.png"
                 Square44x44Logo="icons/appicon_44x44.png"
