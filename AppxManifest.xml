@@ -29,9 +29,9 @@
         <DeviceCapability Name="XboxInput"/>
     </Capabilities>
     <Applications>
-        <Application Id="sm64.us.f3dex2eApp" Executable="sm64.us.f3dex2eApp.exe" EntryPoint="Windows.FullTrustApplication">
+        <Application Id="sm64.us.f3dex2e" Executable="sm64.us.f3dex2e.exe" EntryPoint="Windows.FullTrustApplication">
             <uap:VisualElements
-                DisplayName="sm64.us.f3dex2eApp"
+                DisplayName="sm64.us.f3dex2e"
                 Description="UWP test application"
                 Square150x150Logo="icons/appicon_150x150.png"
                 Square44x44Logo="icons/appicon_44x44.png"
