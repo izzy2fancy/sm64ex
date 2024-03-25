@@ -1084,8 +1084,5 @@ sm64.us.f3dex2e.exe: app.o
 app.o: app.cpp
 	g++ -c $<
 
-clean:
-	- rm app.o sm64.us.f3dex2e.exe sm64.us.f3dex2e.msix priconfig.xml resources.pri
-
 package:
 	./package.bat
