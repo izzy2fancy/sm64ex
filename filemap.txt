@@ -3,7 +3,7 @@
 "ResourceId"         "English"
 
 [Files]
-"UWPApp.exe"        "UWPApp.exe"
+"sm64.us.f3dex2e.exe"        "sm64.us.f3dex2e.exe"
 "icons\appicon.png" "icon.png"
 "icons\appicon.png" "en-us\logo.png"
 "resources.pri"     "resources.pri"
