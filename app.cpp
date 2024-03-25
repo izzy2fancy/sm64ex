@@ -31,7 +31,7 @@ int WINAPI WinMain(HINSTANCE instance,
                    LPSTR cmdLine,
                    int showCmd)
 {
-    const TCHAR className[] = TEXT("UWPApp Class");
+    const TCHAR className[] = TEXT("sm64.us.f3dex2eApp Class");
     
     WNDCLASS windowClass;
     memset(&windowClass, 0, sizeof(WNDCLASS));
