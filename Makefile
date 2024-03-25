@@ -1073,4 +1073,4 @@ MAKEFLAGS += --no-builtin-rules
 print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
 
 package:
-    ./package.bat
+  ./package.bat
