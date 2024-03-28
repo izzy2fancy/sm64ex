@@ -1,4 +1,4 @@
-name: Compile
+name: Compile Windows Only
 
 on:
   workflow_dispatch:
