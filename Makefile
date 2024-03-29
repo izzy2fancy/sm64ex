@@ -1065,7 +1065,7 @@ DLL_NAME := $(EXE:.exe=.dll)
 
 # Set the name of the final DLL
 $(DLL_NAME): $(EXE)
-    mv $< $@
+	mv $< $@
 
 .PHONY: all clean distclean default diff test load libultra res
 .PRECIOUS: $(BUILD_DIR)/bin/%.elf $(SOUND_BIN_DIR)/%.ctl $(SOUND_BIN_DIR)/%.tbl $(SOUND_SAMPLE_TABLES) $(SOUND_BIN_DIR)/%.s $(BUILD_DIR)/%
