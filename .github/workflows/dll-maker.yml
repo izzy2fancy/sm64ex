@@ -1,0 +1,45 @@
+name: Compile Windows Only
+
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+jobs:
+  windows:
+    if: github.event_name != 'release'
+    name: Windows (MSYS2)
+
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+    - uses: actions/checkout@v4.1.1
+    
+    - uses: msys2/setup-msys2@v2
+    
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/msys2
+        key: msys2-dependencies
+        
+    - name: Fetch Dependencies
+      run: pacman -S --noconfirm unzip make git mingw-w64-i686-gcc mingw-w64-x86_64-gcc mingw-w64-i686-glew mingw-w64-x86_64-glew mingw-w64-i686-SDL2 mingw-w64-i686-SDL mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL python3
+      
+    - name: Build
+      run: |
+        make
+        cd build/us_pc
+        rm -rf textures text src sound lib levels include data bin assets actors res
+        rm -f level_rules.mk
+        cd ../../
+        
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: sm64ex-${{ github.run_number }}-${{ github.job }}
+        path: D:\a\sm64ex\sm64ex\build\us_pc\
