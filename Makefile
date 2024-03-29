@@ -742,7 +742,7 @@ ZEROTERM = $(PYTHON) $(TOOLS_DIR)/zeroterm.py
 
 ######################## Targets #############################
 
-all: $(DLL_NAME)
+all: $(EXE)
 
 # thank you apple very cool
 ifeq ($(HOST_OS),Darwin)
@@ -763,7 +763,7 @@ ifeq ($(EXTERNAL_DATA),1)
 #res: $(BASEPACK_PATH)
 
 # prepares the basepack.lst
-#$(BASEPACK_LST): $(DLL_NAME)
+#$(BASEPACK_LST): $(EXE)
 #	@mkdir -p $(BUILD_DIR)/$(BASEDIR)
 #	@touch $(BASEPACK_LST)
 #	@echo "$(BUILD_DIR)/sound/bank_sets sound/bank_sets" > $(BASEPACK_LST)
@@ -1056,16 +1056,10 @@ $(BUILD_DIR)/%.o: $(BUILD_DIR)/%.c
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -MD $(BUILD_DIR)/$*.d -o $@ $<
 
-# Modify the link step to produce a DLL
+
+
 $(EXE): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES)
-	$(LD) -L $(BUILD_DIR) -o $@ $(O_FILES) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS) -shared -Wl,--out-implib=$(B)/lib$(CLIENTBIN).lib
-
-# Change the extension of the final executable from exe to dll
-DLL_NAME := $(EXE:.exe=.dll)
-
-# Set the name of the final DLL
-$(DLL_NAME): $(EXE)
-	mv $< $@
+	$(LD) -L $(BUILD_DIR) -o $@ $(O_FILES) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 
 .PHONY: all clean distclean default diff test load libultra res
 .PRECIOUS: $(BUILD_DIR)/bin/%.elf $(SOUND_BIN_DIR)/%.ctl $(SOUND_BIN_DIR)/%.tbl $(SOUND_SAMPLE_TABLES) $(SOUND_BIN_DIR)/%.s $(BUILD_DIR)/%
