@@ -782,17 +782,17 @@ ifeq ($(EXTERNAL_DATA),1)
 endif
 
 clean:
-  $(RM) -r $(BUILD_DIR_BASE)
+	$(RM) -r $(BUILD_DIR_BASE)
 
 cleantools:
-  $(MAKE) -s -C tools clean
+	$(MAKE) -s -C tools clean
 
 distclean:
-  $(RM) -r $(BUILD_DIR_BASE)
-  ./extract_assets.py --clean
+	$(RM) -r $(BUILD_DIR_BASE)
+	./extract_assets.py --clean
 
 test: $(ROM)
-  $(EMULATOR) $(EMU_FLAGS) $<
+	$(EMULATOR) $(EMU_FLAGS) $<
 
 load: $(ROM)
 	$(LOADER) $(LOADER_FLAGS) $<
