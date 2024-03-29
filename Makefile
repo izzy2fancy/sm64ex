@@ -21,12 +21,9 @@ COMPARE ?= 1
 # If NON_MATCHING is 1, define the NON_MATCHING and AVOID_UB macros when building (recommended)
 NON_MATCHING ?= 1
 
-# Modify the EXE variable to reflect the new target name with the .dll extension
-EXE := $(BUILD_DIR)/$(TARGET).dll
-
 # Modify the LDFLAGS to link the dynamic library appropriately
 ifeq ($(WINDOWS_BUILD),1)
-  LDFLAGS := $(BITS) -march=$(TARGET_ARCH) -Llib -lpthread $(BACKEND_LDFLAGS) -shared
+  LDFLAGS := $(BITS) -march=$(TARGET_ARCH) -Llib -lpthread $(BACKEND_LDFLAGS) -shared -Wl,--out-implib,$(BUILD_DIR)/$(TARGET).lib
   ifeq ($(CROSS),)
     LDFLAGS += -no-pie
   endif
