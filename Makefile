@@ -21,6 +21,17 @@ COMPARE ?= 1
 # If NON_MATCHING is 1, define the NON_MATCHING and AVOID_UB macros when building (recommended)
 NON_MATCHING ?= 1
 
+# Modify the EXE variable to reflect the new target name with the .dll extension
+EXE := $(BUILD_DIR)/$(TARGET).dll
+
+# Modify the LDFLAGS to link the dynamic library appropriately
+ifeq ($(WINDOWS_BUILD),1)
+  LDFLAGS := $(BITS) -march=$(TARGET_ARCH) -Llib -lpthread $(BACKEND_LDFLAGS) -shared
+  ifeq ($(CROSS),)
+    LDFLAGS += -no-pie
+  endif
+endif
+
 # Build and optimize for Raspberry Pi(s)
 TARGET_RPI ?= 0
 
@@ -1055,7 +1066,13 @@ $(BUILD_DIR)/%.o: $(BUILD_DIR)/%.c
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -MD $(BUILD_DIR)/$*.d -o $@ $<
+	
+# Update the target name to your DLL name
+DLL_NAME := sm64ex.dll
 
+# Modify the existing $(EXE) target to build the DLL
+$(EXE): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES)
+	$(LD) -shared -o $(DLL_NAME) $(O_FILES) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 
 
 $(EXE): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES)
