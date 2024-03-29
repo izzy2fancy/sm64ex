@@ -1,4 +1,4 @@
-name: Compile Windows Only
+name: dll maker
 
 on:
   workflow_dispatch:
