@@ -741,8 +741,8 @@ ZEROTERM = $(PYTHON) $(TOOLS_DIR)/zeroterm.py
 # Stubbed
 
 ######################## Targets #############################
-
-all: $(EXE)
+# Targets
+all: $(EXE:.exe=.dll)  # Change the extension from .exe to .dll
 
 # thank you apple very cool
 ifeq ($(HOST_OS),Darwin)
@@ -764,20 +764,20 @@ ifeq ($(EXTERNAL_DATA),1)
 
 # prepares the basepack.lst
 #$(BASEPACK_LST): $(EXE)
-#	@mkdir -p $(BUILD_DIR)/$(BASEDIR)
-#	@touch $(BASEPACK_LST)
-#	@echo "$(BUILD_DIR)/sound/bank_sets sound/bank_sets" > $(BASEPACK_LST)
-#	@echo "$(BUILD_DIR)/sound/sequences.bin sound/sequences.bin" >> $(BASEPACK_LST)
-#	@echo "$(BUILD_DIR)/sound/sound_data.ctl sound/sound_data.ctl" >> $(BASEPACK_LST)
-#	@echo "$(BUILD_DIR)/sound/sound_data.tbl sound/sound_data.tbl" >> $(BASEPACK_LST)
-#	@cd $(BUILD_DIR) ; find textures/skybox_tiles -name \*.png -exec echo "$(BUILD_DIR)/{} gfx/{}" >> basepack.lst \;
-#	@find actors -name \*.png -exec echo "{} gfx/{}" >> $(BASEPACK_LST) \;
-#	@find levels -name \*.png -exec echo "{} gfx/{}" >> $(BASEPACK_LST) \;
-#	@find textures -name \*.png -exec echo "{} gfx/{}" >> $(BASEPACK_LST) \;
+#    @mkdir -p $(BUILD_DIR)/$(BASEDIR)
+#    @touch $(BASEPACK_LST)
+#    @echo "$(BUILD_DIR)/sound/bank_sets sound/bank_sets" > $(BASEPACK_LST)
+#    @echo "$(BUILD_DIR)/sound/sequences.bin sound/sequences.bin" >> $(BASEPACK_LST)
+#    @echo "$(BUILD_DIR)/sound/sound_data.ctl sound/sound_data.ctl" >> $(BASEPACK_LST)
+#    @echo "$(BUILD_DIR)/sound/sound_data.tbl sound/sound_data.tbl" >> $(BASEPACK_LST)
+#    @cd $(BUILD_DIR) ; find textures/skybox_tiles -name \*.png -exec echo "$(BUILD_DIR)/{} gfx/{}" >> basepack.lst \;
+#    @find actors -name \*.png -exec echo "{} gfx/{}" >> $(BASEPACK_LST) \;
+#    @find levels -name \*.png -exec echo "{} gfx/{}" >> $(BASEPACK_LST) \;
+#    @find textures -name \*.png -exec echo "{} gfx/{}" >> $(BASEPACK_LST) \;
 
 # prepares the resource ZIP with base data
 #$(BASEPACK_PATH): $(BASEPACK_LST)
-#	@$(PYTHON) $(TOOLS_DIR)/mkzip.py $(BASEPACK_LST) $(BASEPACK_PATH)
+#    @$(PYTHON) $(TOOLS_DIR)/mkzip.py $(BASEPACK_LST) $(BASEPACK_PATH)
 
 endif
 
@@ -1058,8 +1058,9 @@ $(BUILD_DIR)/%.o: %.s
 
 
 
+# Locate where the final executable is named and change the extension
 $(EXE): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES)
-	$(LD) -L $(BUILD_DIR) -o $@ $(O_FILES) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
+    $(LD) -L $(BUILD_DIR) -o $(EXE:.exe=.dll) $(O_FILES) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 
 .PHONY: all clean distclean default diff test load libultra res
 .PRECIOUS: $(BUILD_DIR)/bin/%.elf $(SOUND_BIN_DIR)/%.ctl $(SOUND_BIN_DIR)/%.tbl $(SOUND_SAMPLE_TABLES) $(SOUND_BIN_DIR)/%.s $(BUILD_DIR)/%
