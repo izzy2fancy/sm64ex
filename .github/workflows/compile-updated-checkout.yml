@@ -26,7 +26,6 @@ jobs:
  
     - name: Build
       run: |
-        tools/apply_patch.sh enhancements/60fps_ex.patch
         make
         cd build/us_pc
         rm -rf textures text src sound lib levels include data bin assets actors res
